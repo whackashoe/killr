@@ -18,6 +18,7 @@ class CreatePastesTable extends Migration {
             $table->text('code');
             $table->string('ip');
             $table->string('slug');
+            $table->string('parent_slug');
             $table->integer('views');
             $table->timestamps();
             $table->softDeletes();

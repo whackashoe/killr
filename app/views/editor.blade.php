@@ -3,6 +3,7 @@
 <div id="linenumbers"></div>
 <div id="content"><pre><code></code></pre></div>
 <textarea spellcheck="false" autocomplete="off" autofocus="true" id="editor" name="code">{{ $paste->code or '' }}</textarea>
+<div id="caret"></div>
 <menu id="mainmenu">
     <div id="linepadder"></div>
     @if(isset($paste->ip) && strcmp($paste->ip, Request::getClientIp()) == 0)
