@@ -11,6 +11,13 @@ $(document).ready(function() {
         }
     });
 
+    $("#editor").on('keydown', function() {
+        update_caret();
+    })
+    .on('click', function() {
+        update_caret();
+    });
+
     $("#editor").bind('input propertychange', function() {
         var decoded = $("#editor").val();
 
@@ -71,8 +78,8 @@ $(document).ready(function() {
         var content_offset = $("#content").offset();
         
         $("#caret").css({
-            left: (14 / 2) + content_offset.left + (caret_col * 14) + "px",
-            top: (14 / 2) + ln_offset.top + "px"
+            left: (14) + content_offset.left + 8 + (caret_col * 8) + "px",
+            top: (ln_offset.top - 2) + "px"
         });
 
     }
