@@ -8,6 +8,8 @@ $(document).ready(function() {
     document.querySelector('#editor').addEventListener('input', function() { update_caret(this); });
     document.querySelector('#editor').addEventListener('propertychange', function() { update_caret(this); });
     document.querySelector('#editor').addEventListener('click', function() { update_caret(this); });
+    document.querySelector('#editor').addEventListener('keydown', function() { update_caret(this); });
+    document.querySelector('#editor').addEventListener('keyup', function() { update_caret(this); });
 
     //catch tabs
     $("body").on('keydown', '#editor', function(e) {
