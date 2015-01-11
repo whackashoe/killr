@@ -27,11 +27,22 @@ class PasteController extends BaseController {
 		return View::make('editor', ['paste' => $paste]);
 	}
 
+    public function mods($slug)
+    {
+        try {
+            $paste = $this->paste->with('children')->where('slug', '=', $slug)->firstOrFail();
+        } catch(ModelNotFoundException $e) {
+            App::abort(404);
+        }
+
+        return View::make('mods', ['paste' => $paste]);
+    }
+
 	public function create()
     {
         $cmdline = false;
         if(Input::has('code')) {
-            $input = Input::only('code', 'parent_slug');
+            $input = Input::only('code', 'parent_id');
         } else {
             $input = [];
             $req = Request::instance();
@@ -53,7 +64,7 @@ class PasteController extends BaseController {
         $paste->ip = $input['ip'];
         $paste->code = $input['code'];
         $paste->slug = $slug;
-        $paste->parent_slug = Input::get('parent_slug', '');
+        $paste->parent_id = Input::get('parent_id', '');
         $paste->save();
 
         if($cmdline) {

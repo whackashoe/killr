@@ -15,10 +15,10 @@ class CreatePastesTable extends Migration {
         Schema::create('pastes', function($table)
         {
             $table->increments('id');
+            $table->integer('parent_id')->nullable();
             $table->text('code');
             $table->string('ip');
             $table->string('slug');
-            $table->string('parent_slug');
             $table->integer('views');
             $table->timestamps();
             $table->softDeletes();

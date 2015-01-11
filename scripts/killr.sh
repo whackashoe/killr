@@ -1,3 +1,3 @@
 #!/bin/sh
 
-curl -X POST --data-binary @$1 http://killr.dev
+curl -X POST --data-binary @$1 http://killr.io

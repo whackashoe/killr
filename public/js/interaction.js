@@ -38,7 +38,7 @@ $(document).ready(function() {
     }).trigger('propertychange');
 
     $("#save").click(function() {
-        $.post('/', {code: $('#editor').val(), parent_slug: $("#parent_slug").val()}, function(result) {
+        $.post('/', {code: $('#editor').val(), parent_id: $("#parent_id").val()}, function(result) {
             if(result.success) {
                 $("#success-modal").html('<a href="/' + result.slug + '">killr.io/' + result.slug + '</a>');
                 $("#overlay").show();

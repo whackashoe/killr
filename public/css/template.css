@@ -171,3 +171,23 @@ button:hover {
     border-radius: 0px;
     padding: 0px;
 }
+
+#modlisting {
+    margin-top:3em;
+    margin-left: 3em;
+}
+
+#modlisting ul li {
+    list-style-type: none;
+    line-height: 1.5em;
+}
+
+#modlisting ul li a {
+    color:#fff;
+    opacity: 0.5;
+    text-decoration: none;
+}
+
+#modlisting ul li a:hover {
+    opacity: 0.8;
+}
