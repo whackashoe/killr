@@ -5,10 +5,10 @@
         <button id="views">views {{ $paste->views }}</button>
         <button id="delete">delete</button>
     @endif
+    <button id="save">save</button>
     @if(isset($paste->parent_id) && $paste->parent_id != null)
         <a href="{{ url($paste->parent->slug) }}"><button id="parent">parent</button></a>
     @endif
-    <button id="save">save</button>
     @if(isset($paste->modsCount) && $paste->modsCount > 0)
         <a href="{{ url($paste->slug . '/mods') }}"><button id="parent">mods ({{ $paste->modsCount }})</button></a>
     @endif

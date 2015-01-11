@@ -64,7 +64,10 @@ class PasteController extends BaseController {
         $paste->ip = $input['ip'];
         $paste->code = $input['code'];
         $paste->slug = $slug;
-        $paste->parent_id = Input::get('parent_id', '');
+        $parent_id = Input::get('parent_id', null);
+        if($parent_id != null && $parent_id != 0) {
+            $paste->parent_id = $parent_id;
+        }
         $paste->save();
 
         if($cmdline) {

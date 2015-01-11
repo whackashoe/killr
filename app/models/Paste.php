@@ -12,7 +12,7 @@ class Paste extends Eloquent {
     public static $rules = [
         'code'        => 'required|max:64000',
         'ip'          => 'required|ip',
-        'parent_slug' => 'size:5'
+        'parent_id'   => 'integer'
     ];
 
     public function parent()
