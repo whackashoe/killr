@@ -119,8 +119,6 @@ button {
     outline: 0px;
     background-color: transparent;
     color:#fff;
-    float:right;
-    margin-right:2em;
     font-family: monospace;
     opacity: 0.5;
 }
@@ -128,6 +126,11 @@ button {
 button:hover {
     opacity: 0.8;
     cursor:pointer;
+}
+
+#mainmenu button {
+    float:right;
+    margin-right:2em;
 }
 
 #overlay {
@@ -161,7 +164,7 @@ button:hover {
     display: none;
 }
 
-#logo {
+#mainmenu #logo {
     font-family: monospace;
     float:left;
     margin-left: 2em;
@@ -170,6 +173,20 @@ button:hover {
     border-right: 0px;
     border-radius: 0px;
     padding: 0px;
+}
+
+#mainmenu #createdat {
+    font-family: monospace;
+    float:left;
+    margin-left: 2em;
+    border:0px;
+    padding: 0px;
+    opacity: 0;
+}
+
+#mainmenu #createdat:hover {
+    opacity: 0.5;
+    cursor:default;
 }
 
 #modlisting {

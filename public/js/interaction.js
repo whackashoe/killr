@@ -60,6 +60,12 @@ $(document).ready(function() {
         });
     });
 
+    $("#expand-mods").click(function() {
+        $.getJSON(document.URL + ".json", function(results) {
+            console.log(results);
+        });
+    });
+
     function update_caret(el)
     {
         var coordinates = getCaretCoordinates(el, el.selectionEnd);
