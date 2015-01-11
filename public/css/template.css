@@ -15,10 +15,6 @@ html, body {
     font-size:14px;
 }
 
-button {
-    font-family: monospace;
-}
-
 ::selection {
   background: rgba(255, 183, 183, 0.5);
 }
@@ -125,6 +121,13 @@ button {
     color:#fff;
     float:right;
     margin-right:2em;
+    font-family: monospace;
+    opacity: 0.5;
+}
+
+button:hover {
+    opacity: 0.8;
+    cursor:pointer;
 }
 
 #overlay {
@@ -156,4 +159,15 @@ button {
 
 .hide {
     display: none;
+}
+
+#logo {
+    font-family: monospace;
+    float:left;
+    margin-left: 2em;
+    border-left:0px;
+    border-top:0px;
+    border-right: 0px;
+    border-radius: 0px;
+    padding: 0px;
 }

@@ -7,6 +7,7 @@
 <div id="caret"></div>
 <menu id="mainmenu">
     <div id="linepadder"></div>
+    <a href="{{ url('/') }}"><button id="logo">killr.io</button></a>
     @if(isset($paste->ip) && strcmp($paste->ip, Request::getClientIp()) == 0)
         <button id="views">views {{ $paste->views }}</button>
         <button id="delete">delete</button>
