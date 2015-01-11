@@ -11,7 +11,6 @@
         <title>killr.io</title>
 
         <link href="{{ asset('css/hybrid.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/perfect-scrollbar.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/template.css') }}" rel="stylesheet">
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -25,10 +24,10 @@
     <body>
         @yield('content')
 
-        <script src="{{ asset('/js/jquery.min.js') }}"></script>
-        <script src="{{ asset('/js/jquery.caret-1.5.2.js') }}"></script>
-        <script src="{{ asset('/js/highlight.pack.js') }}"></script>
-        <script src="{{ asset('/js/perfect-scrollbar.min.js') }}"></script>
-        <script src="{{ asset('/js/interaction.js') }}"></script>
+        <script src="{{ asset('js/jquery.min.js') }}"></script>
+        <script src="{{ asset('js/jquery.caret-1.5.2.js') }}"></script>
+        <script src="{{ asset('js/highlight.pack.js') }}"></script>
+        <script src="{{ asset('js/textarea-caret-position.js') }}"></script>
+        <script src="{{ asset('js/interaction.js') }}"></script>
     </body>
 </html>

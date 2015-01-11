@@ -31,7 +31,7 @@ class PasteController extends BaseController {
     {
         $cmdline = false;
         if(Input::has('code')) {
-            $input = Input::only('code');
+            $input = Input::only('code', 'parent_slug');
         } else {
             $input = [];
             $req = Request::instance();
@@ -53,6 +53,7 @@ class PasteController extends BaseController {
         $paste->ip = $input['ip'];
         $paste->code = $input['code'];
         $paste->slug = $slug;
+        $paste->parent_slug = Input::get('parent_slug', '');
         $paste->save();
 
         if($cmdline) {
