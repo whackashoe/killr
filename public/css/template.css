@@ -8,7 +8,6 @@ html, body {
     padding:0px;
     margin:0px;
     background-color: #1D1F21;
-    overflow: hidden;
 }
 
 * {
@@ -49,9 +48,29 @@ button {
     word-wrap:normal;
     overflow: hidden;
 }
+
 #editor {
     background-color:transparent;
-    color:rgba(255, 255, 255, 0.5);
+    color:rgba(255, 255, 255, 0.0);
+    z-index: 100;
+}
+
+#caret {
+    position: absolute;
+    top:0px;
+    left:0px;
+    width:1px;
+    height:1.25em;
+    background-color: rgba(255, 255, 255, 0.5);
+    z-index: 50;
+    -webkit-animation: cpulse 1.4s infinite alternate;
+    line-height: 1.25em;
+}
+
+@-webkit-keyframes cpulse {
+      0%  { background-color: rgba(255, 255, 255, 0.1); }
+     50%  { background-color: rgba(255, 255, 255, 0.5); }
+     100% { background-color: rgba(255, 255, 255, 0.1); }
 }
 
 .hljs, #editor {
@@ -87,7 +106,7 @@ button {
     color:#fff;
     margin: 0;
     padding: 0;
-    z-index: 5;
+    z-index: 500;
 }
 
 #linepadder {
@@ -124,7 +143,7 @@ button {
     left:25%;
     width:50%;
     height: 40%;
-    z-index: 20;
+    z-index: 200;
     color:#fff;
     text-align: center;
 }
