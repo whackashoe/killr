@@ -11,23 +11,22 @@ class PastesTableSeeder extends Seeder {
     {
         Paste::create([
             'slug' => 'about',
-            'code' => "
-about killr.io
-===
+            'code' => '
+#!/bin/bash
+stdin="$(ls -l /proc/self/fd/0)"
+stdin="${stdin/*-> /}"
 
-share code or get beat.
-
-#!/bin/sh
-curl -X POST --data-binary @$1 https://killr.io
-
-save that to killr.sh.
-
-run chmod +x killr.sh
-
-now do ./killr.sh ~/code/filetoshare
-
-convenient eh?
-"
+if [[ "$stdin" =~ ^/dev/pts/[0-9] ]]; then
+    if [ $# -eq 0 ]
+        then
+            echo "No filename supplied"
+    else
+        curl -X POST --data-binary @$1 http://killr.io
+    fi
+else
+    curl -X POST --data-binary  @- http://killr.io
+fi
+'
         ]);
 
         Paste::create([
