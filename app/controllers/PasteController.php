@@ -32,7 +32,7 @@ class PasteController extends BaseController {
         try {
             $paste = $this->paste->with('children')->where('slug', '=', $slug)->firstOrFail();
         } catch(ModelNotFoundException $e) {
-            App::abort(404);
+            return Redirect::to($slug);
         }
 
         return View::make('mods', ['paste' => $paste]);
@@ -43,7 +43,7 @@ class PasteController extends BaseController {
         try {
             $paste = $this->paste->with('children')->where('slug', '=', $slug)->firstOrFail();
         } catch(ModelNotFoundException $e) {
-            return Response::json(['success' => false, 'errors' => ['404' => 'not found']]);
+            return Response::json(['success' => false, 'errors' => ['404' => 'not found']], 404);
         }
 
         $mods = $this->paste->with('mods')
@@ -70,7 +70,7 @@ class PasteController extends BaseController {
 
         $validator = Validator::make($input, Paste::$rules);
         if($validator->fails()) {
-            return Response::json((object) ['success' => false, 'errors' => $validator->messages()]);
+            return Response::json((object) ['success' => false, 'errors' => $validator->messages()], 403);
         }
 
         do {
@@ -98,13 +98,13 @@ class PasteController extends BaseController {
         try {
             $paste = $this->paste->where('slug', '=', $slug)->firstOrFail();
         } catch(ModelNotFoundException $e) {
-            return Response::json(['success' => false, 'errors' => ['404' => 'model not found']]);
+            return Response::json(['success' => false, 'errors' => ['404' => 'model not found']], 404);
         }
 
         $ip = Request::getClientIp();
 
         if(strcmp($paste->ip, $ip) != 0) {
-            return Response::json(['success' => false, 'errors' => ['not creator' => 'you have different ip than creator']]);
+            return Response::json(['success' => false, 'errors' => ['not creator' => 'you have different ip than creator']], 401);
         }
 
         $paste->delete();

@@ -12,9 +12,6 @@ class PastesTableSeeder extends Seeder {
         Paste::create([
             'slug' => 'about',
             'code' => '
-about killr.io
-===
-
 share code or get beat.
 
 use killr to quickly paste text. 
@@ -56,12 +53,6 @@ convenient eh?
         Paste::create([
             'slug' => 'terms',
             'code' => "
-terms of service
-===
-
-remember that one kid who thought he was funny but everyone thought he sucked
-    don't be an older version of that
-
 if you use this site nothing i have ever done is my fault and you will take full responsibility for all of it
     or at least as much as the courts will allow :)
 "

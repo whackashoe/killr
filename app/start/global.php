@@ -1,4 +1,5 @@
 <?php
+use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,7 +49,19 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 
 App::error(function(Exception $exception, $code)
 {
-	Log::error($exception);
+  Log::error($exception);
+
+  $p = new Paste;
+  $p->code = 'Shit, an error occured.';
+
+  return Response::view('editor', ['paste' => $p], 500);
+});
+
+App::error(function(TooManyRequestsHttpException $exception, $code) {
+  $p = new Paste;
+  $p->code = 'Too many requests. Chill out.';
+
+  return Response::view('editor', ['paste' => $p], 429);
 });
 
 /*
@@ -68,8 +81,8 @@ App::down(function()
 });
 
 App::missing(function() {
-    $e_404 = new Paste;
-    $e_404->code = '
+    $p = new Paste;
+    $p->code = '
     __   __     ______     ______      ______   ______     __  __     __   __     _____    
    /\ "-.\ \   /\  __ \   /\__  _\    /\  ___\ /\  __ \   /\ \/\ \   /\ "-.\ \   /\  __-.  
    \ \ \-.  \  \ \ \/\ \  \/_/\ \/    \ \  __\ \ \ \/\ \  \ \ \_\ \  \ \ \-.  \  \ \ \/\ \ 
@@ -77,7 +90,7 @@ App::missing(function() {
      \/_/ \/_/   \/_____/     \/_/      \/_/     \/_____/   \/_____/   \/_/ \/_/   \/____/                                                                                        
 ';
 
-    return View::make('editor', ['paste' => $e_404]);
+    return Response::view('editor', ['paste' => $p], 404);
 });
 
 /*

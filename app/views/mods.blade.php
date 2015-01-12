@@ -18,14 +18,16 @@ view the modification tree for {{ $paste->slug }}
 @section('content')
 <div id="modlisting">
     <ul>
-        @foreach($paste->children as $mod)
+        @forelse($paste->children as $mod)
             <li>
                 <a href="{{ url($mod->slug) }}">{{ $mod->created_at }} ({{ $mod->modsCount }} mods)</a>
                 @if($mod->modsCount > 0)
                     <button class="expand-mods" data-slug="{{ $mod->slug }}">+</button>
                 @endif
             </li>
-        @endforeach
+        @empty
+            <li><a href="{{ url($paste->slug) }}">there's been no modifications :( </a></li>
+        @endforelse
     </ul>
 </div>
 @stop
