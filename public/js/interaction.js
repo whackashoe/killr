@@ -31,14 +31,16 @@ $(document).ready(function() {
             hljs.initHighlighting.called = false;
             hljs.initHighlighting();
         });
-        $('#content, #content pre, #content code, #editor, #linenumbers').css('height', $('#editor')[0].scrollHeight + 500);
-        $('#content, #console pre, #content code, #editor').css('width', $('#editor')[0].scrollWidth + 20);
+        $('#content, #content pre, #content code, #editor, #linenumbers').css('height', $('#editor')[0].scrollHeight);
+        $('#content, #console pre, #content code, #editor').css('width', $('#editor')[0].scrollWidth);
 
         cols_per_line = [];
         $('#linenumbers').html('<table>'+$.map(decoded.split('\n'), function(t, i) {
             cols_per_line.push(t.length);
             return '<tr><td>'+(i+1)+'</td></tr>';
         }).join('')+'</table>');
+
+        $("#linenumbers").height($("#linenumbers table").height());
     }).trigger('propertychange');
 
     $("#save").click(function() {

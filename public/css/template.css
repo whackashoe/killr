@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Droid+Sans+Mono);
+@import url(//fonts.googleapis.com/css?family=Droid+Sans+Mono);
 
 html, body {
     height:100vh;
@@ -49,6 +49,7 @@ html, body {
     background-color:transparent;
     color:rgba(255, 255, 255, 0.0);
     z-index: 100;
+    resize: none;
 }
 
 #caret {
@@ -79,6 +80,7 @@ html, body {
     background-color: #282B2E;
     color:#fff;
     z-index: 10;
+    min-height: 100vh;
 }
 #linenumbers table {
     width: 100%;
