@@ -43,6 +43,31 @@ if you use this site nothing i have ever done is my fault and you will take full
     or at least as much as the courts will allow :)
 "
         ]);
+
+        for($i=0; $i<6; $i++) {
+            $p = Paste::create([
+                'slug' => strtolower(str_random(5)),
+                'code' => strtolower(str_random(rand(100, 500)))
+            ]);
+
+            $this->tree($p->id);
+        }
     }
 
+    private function tree($id)
+    {
+        $r = rand(0, 100);
+
+        while($r > 50) {
+            $p = Paste::create([
+                'parent_id' => $id,
+                'slug' => strtolower(str_random(5)),
+                'code' => strtolower(str_random(rand(100, 500)))
+            ]);
+
+            $this->tree($p->id);
+
+            $r = rand(0, 100);
+        }
+    }
 }

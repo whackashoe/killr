@@ -13,6 +13,9 @@
         @foreach($paste->children as $mod)
             <li>
                 <a href="{{ url($mod->slug) }}">{{ $mod->created_at }} ({{ $mod->modsCount }} mods)</a>
+                @if($mod->modsCount > 0)
+                    <button class="expand-mods" data-slug="{{ $mod->slug }}">+</button>
+                @endif
             </li>
         @endforeach
     </ul>

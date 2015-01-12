@@ -59,7 +59,7 @@ html, body {
     height:1.25em;
     background-color: rgba(255, 255, 255, 0.5);
     z-index: 50;
-    -webkit-animation: cpulse 1.4s infinite alternate;
+    -webkit-animation: cpulse 1.4s infinite;
     line-height: 1.25em;
 }
 

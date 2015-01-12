@@ -26,7 +26,7 @@ class Paste extends Eloquent {
     }
 
     public function mods(){
-        return $this->hasMany('Paste', 'parent_id');
+        return $this->hasMany('Paste', 'parent_id')->select('slug', 'created_at', 'parent_id', 'id');
     }
 
     public function getModsCountAttribute()

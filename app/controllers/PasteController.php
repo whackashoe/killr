@@ -38,6 +38,23 @@ class PasteController extends BaseController {
         return View::make('mods', ['paste' => $paste]);
     }
 
+    public function modsJson($slug)
+    {
+        try {
+            $paste = $this->paste->with('children')->where('slug', '=', $slug)->firstOrFail();
+        } catch(ModelNotFoundException $e) {
+            return Response::json(['success' => false, 'errors' => ['404' => 'not found']]);
+        }
+
+        $mods = $this->paste->with('mods')
+            ->select('slug', 'created_at', 'parent_id', 'id')
+            ->where('parent_id', '=', $paste->id)
+            ->get();
+        //$mods->with('children');
+
+        return Response::json($mods);
+    }
+
 	public function create()
     {
         $cmdline = false;
