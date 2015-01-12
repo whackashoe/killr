@@ -6,12 +6,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
-        <link rel="icon" href="/favicon.ico">
+        <link rel="icon" href="{{ asset('favicon.ico') }}">
 
         <title>killr.io</title>
 
-        <link href="{{ asset('css/hybrid.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/template.css') }}" rel="stylesheet">
+        <link href="{{ asset('build/styles.css') }}" rel="stylesheet">
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -31,10 +30,6 @@
         </menu>
         @yield('content')
 
-        <script src="{{ asset('js/jquery.min.js') }}"></script>
-        <script src="{{ asset('js/jquery.caret-1.5.2.js') }}"></script>
-        <script src="{{ asset('js/highlight.pack.js') }}"></script>
-        <script src="{{ asset('js/textarea-caret-position.js') }}"></script>
-        <script src="{{ asset('js/interaction.js') }}"></script>
+        <script src="{{ asset('build/scripts.min.js') }}"></script>
     </body>
 </html>

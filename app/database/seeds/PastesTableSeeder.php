@@ -12,6 +12,13 @@ class PastesTableSeeder extends Seeder {
         Paste::create([
             'slug' => 'about',
             'code' => '
+about killr.io
+===
+
+share code or get beat.
+
+
+
 #!/bin/bash
 stdin="$(ls -l /proc/self/fd/0)"
 stdin="${stdin/*-> /}"
@@ -26,6 +33,17 @@ if [[ "$stdin" =~ ^/dev/pts/[0-9] ]]; then
 else
     curl -X POST --data-binary  @- http://killr.io
 fi
+
+
+
+save that to killr.sh.
+
+run chmod +x killr.sh
+
+now do ./killr.sh ~/code/filetoshare
+
+convenient eh?
+
 '
         ]);
 
