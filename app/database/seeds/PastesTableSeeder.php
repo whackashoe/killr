@@ -17,6 +17,11 @@ about killr.io
 
 share code or get beat.
 
+use killr to quickly paste text. 
+share the url - others can make modifications (under new urls) that you can see. 
+try it out, feel free to edit this page.
+
+you should use this script:
 
 
 #!/bin/bash
@@ -36,11 +41,12 @@ fi
 
 
 
-save that to killr.sh.
+save that to /usr/local/bin/killr
 
-run chmod +x killr.sh
+run chmod +x /usr/local/bin/killr
 
-now do ./killr.sh ~/code/filetoshare
+now do killr ~/code/filetoshare
+or echo "sweet dude" | killr
 
 convenient eh?
 
@@ -61,6 +67,7 @@ if you use this site nothing i have ever done is my fault and you will take full
 "
         ]);
 
+        /*
         for($i=0; $i<6; $i++) {
             $p = Paste::create([
                 'slug' => strtolower(str_random(5)),
@@ -68,7 +75,7 @@ if you use this site nothing i have ever done is my fault and you will take full
             ]);
 
             $this->tree($p->id);
-        }
+        }*/
     }
 
     private function tree($id)

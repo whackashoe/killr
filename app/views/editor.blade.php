@@ -1,5 +1,19 @@
 @extends('layouts.default')
 
+@section('title')
+@if(!isset($paste->id))
+killr.io :: paste code and text, optionally collaborate with friends or strangers
+@else
+killr.io :: {{ $paste->slug }} paste
+@endif
+@stop
+
+@section('description')
+@if(!isset($paste->id))
+killr.io is the most intuitive, quick to use, and beautiful pasting and collaboration tool available.
+@endif
+@stop
+
 @section('menu_items')
     @if(isset($paste->ip) && strcmp($paste->ip, Request::getClientIp()) == 0)
         <button id="views">views {{ $paste->views }}</button>

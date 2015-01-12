@@ -1,5 +1,13 @@
 @extends('layouts.default')
 
+@section('title')
+killr.io :: {{ $paste->slug }} modification tree
+@stop
+
+@section('description')
+view the modification tree for {{ $paste->slug }} 
+@stop
+
 @section('menu_items')
     @if(isset($paste->parent_slug) && !empty($paste->parent_slug))
         <a href="{{ url($paste->parent_slug) }}"><button id="parent">parent</button></a>
