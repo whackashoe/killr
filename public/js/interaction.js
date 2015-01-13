@@ -1,4 +1,25 @@
+/*
+ * TODO
+ * only recreate linenumbers when we paste,enter newline, or mass delete
+ * use timeout to delay running hljs until we haven't typed for a moment
+ * create diff page:
+ *  killr.io/asdaa/diff/lkjww
+ * when modifying existing paste highlight (in linenumbers) modified rows
+ * add killr.io/asdaa/raw -- add raw link to header
+ * add killr.io/asdaa/md -- markdown rendering ?
+ * add total_mods column to db, we need to traverse upwards along tree and increment count when mod is added
+ * add killr.io/asdaa/demo -- view raw as actual html
+*/
+
 var getCaretCoordinates = require('textarea-caret-position');
+
+String.prototype.replaceAll = function(target, replacement) {
+    return this.split(target).join(replacement);
+};
+
+String.prototype.endsWith = function(suffix) {
+    return this.indexOf(suffix, this.length - suffix.length) !== -1;
+};
 
 $(document).ready(function() {
     hljs.initHighlightingOnLoad();
@@ -23,6 +44,7 @@ $(document).ready(function() {
     });
 
     $("#editor").bind('input propertychange', function() {
+        $("#editor").val($("#editor").val().replaceAll('\t', '    '));
         var decoded = $("#editor").val();
 
         $('#content pre code').text(decoded);
@@ -44,23 +66,40 @@ $(document).ready(function() {
     }).trigger('propertychange');
 
     $("#save").click(function() {
-        $.post('/', {code: $('#editor').val(), parent_id: $("#parent_id").val()}, function(result) {
+        var url = document.URL + (document.URL.endsWith('/') ? '' : '/') + 'create';
+        $.post(url, {code: $('#editor').val(), parent_id: $("#parent_id").val()}, function(result) {
+            console.log(result);
             if(result.success) {
                 $("#success-modal").html('<a href="/' + result.slug + '">killr.io/' + result.slug + '</a>');
                 $("#overlay").show();
                 $("#success-modal").show();
+            } else {
+                var error_html = '<li>' + result.errors.code + '</li>';
+
+                $("#error-modal").html('<ul>' + error_html + '</ul>');
+                console.log(error_html);
+                $("#overlay").show();
+                $("#error-modal").show();
             }
         });
     });
 
     $("#delete").click(function() {
-        $.post(document.URL, function(result) {
+        var url = document.URL + (document.URL.endsWith('/') ? '' : '/') + 'delete';
+        $.post(url, function(result) {
+            console.log(result);
             if(result.success) {
                 $("#success-modal").html('<a href="/">deleted</a>');
                 $("#overlay").show();
                 $("#success-modal").show();
             }
         });
+    });
+
+    $("#error-modal").click(function() {
+        $("#overlay").hide();
+        $("#error-modal").hide();
+        $("#editor").focus();
     });
 
     function expand_mods(el)

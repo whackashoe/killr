@@ -27,6 +27,23 @@ class PasteController extends BaseController {
 		return View::make('editor', ['paste' => $paste]);
 	}
 
+    public function getRaw($slug)
+    {
+        try {
+            $paste = $this->paste->where('slug', '=', $slug)->firstOrFail();
+        } catch(ModelNotFoundException $e) {
+            return Redirect::to($slug);
+        }
+
+        $ip = Request::getClientIp();
+        if(strcmp($paste->ip, $ip) != 0) {
+            $paste->increment('views');
+            $paste->save();
+        }
+
+        return Response::make($paste->code, 200, ['Content-Type' => 'text/plain']);
+    }
+
     public function mods($slug)
     {
         try {
@@ -55,7 +72,7 @@ class PasteController extends BaseController {
         return Response::json($mods);
     }
 
-	public function create()
+	public function create($parent_slug = null)
     {
         $cmdline = false;
         if(Input::has('code')) {
@@ -70,7 +87,7 @@ class PasteController extends BaseController {
 
         $validator = Validator::make($input, Paste::$rules);
         if($validator->fails()) {
-            return Response::json((object) ['success' => false, 'errors' => $validator->messages()], 403);
+            return Response::json((object) ['success' => false, 'errors' => $validator->messages()]);
         }
 
         do {
@@ -81,10 +98,14 @@ class PasteController extends BaseController {
         $paste->ip = $input['ip'];
         $paste->code = $input['code'];
         $paste->slug = $slug;
-        $parent_id = Input::get('parent_id', null);
-        if($parent_id != null && $parent_id != 0) {
-            $paste->parent_id = $parent_id;
+
+        if($parent_slug != null) {
+            $parent = $this->paste->where('slug', 'LIKE', $parent_slug)->first();
+            if($parent != null) {
+                $paste->parent_id = $parent->id;
+            }
         }
+
         $paste->save();
 
         if($cmdline) {
