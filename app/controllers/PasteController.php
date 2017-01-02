@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use SebastianBergmann\Diff\Differ;
+
 
 class PasteController extends BaseController {
     protected $paste;
@@ -70,6 +72,38 @@ class PasteController extends BaseController {
         //$mods->with('children');
 
         return Response::json($mods);
+    }
+
+    public function diff($slug, $modslug)
+    {
+        try {
+            $paste = $this->paste->with('children')->where('slug', '=', $slug)->firstOrFail();
+        } catch(ModelNotFoundException $e) {
+            return Redirect::to($slug);
+        }
+
+        try {
+            $mod = $this->paste->where('slug', '=', $modslug)->firstOrFail();
+        } catch(ModelNotFoundException $e) {
+            return Redirect::to($slug);
+        }
+
+        $diff = (new Differ)->diff($paste->code, $mod->code);
+        $diff_lines = array_slice(explode("\n", $diff), 3);
+        $diff_line_list = [];
+        foreach($diff_lines as &$line) {
+            $diff_line_list[] = substr($line, 0, 1);
+            $line = substr($line, 1);
+        }
+        $diff_str = implode("\n", $diff_lines);
+
+
+        return View::make('diff', [
+            'paste'   => $paste,
+            'mod'     => $mod,
+            'diff'    => $diff_str,
+            'changes' => $diff_line_list,
+        ]);
     }
 
 	public function create($parent_slug = null)

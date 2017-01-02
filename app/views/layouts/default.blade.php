@@ -39,5 +39,6 @@
         @yield ('content')
 
         <script src="{{ asset('build/scripts.min.js?id=' . mt_rand(0, 100000)) }}"></script>
+        @yield ('scripts')
     </body>
 </html>
