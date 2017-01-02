@@ -5,8 +5,6 @@
  * create diff page:
  *  killr.io/asdaa/diff/lkjww
  * when modifying existing paste highlight (in linenumbers) modified rows
- * add killr.io/asdaa/raw -- add raw link to header
- * add killr.io/asdaa/md -- markdown rendering ?
  * add total_mods column to db, we need to traverse upwards along tree and increment count when mod is added
  * add killr.io/asdaa/demo -- view raw as actual html
 */
@@ -51,7 +49,7 @@ $(document).ready(function() {
 
         $("#content code").each(function(i, block) {
             hljs.initHighlighting.called = false;
-            hljs.initHighlighting();
+            hljs.highlightBlock(block);
         });
         $('#content, #content pre, #content code, #editor, #linenumbers').css('height', $('#editor')[0].scrollHeight);
         $('#content, #console pre, #content code, #editor').css('width', $('#editor')[0].scrollWidth);
