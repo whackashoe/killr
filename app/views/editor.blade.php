@@ -91,17 +91,7 @@ killr.io is the most intuitive, quick to use, and beautiful pasting and collabor
             $("#error-modal").hide();
             $("#editor").focus();
         });
-
-        function update_caret(el)
-        {
-            var coordinates = getCaretCoordinates(el, el.selectionEnd);
-            var content_offset = $("#content").offset();
-
-            $("#caret").css({
-                left: content_offset.left + coordinates.left,
-                top:  content_offset.top + coordinates.top
-            });
-        }
     });
+
     </script>
 @stop

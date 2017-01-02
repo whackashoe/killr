@@ -41,16 +41,17 @@ html, body {
     top:2em;
     left:3em;
     width:calc(100vw - 3em);
-    white-space: pre-wrap;
+    white-space: pre;
     word-wrap:normal;
     overflow: hidden;
 }
 
 #editor {
     background-color:transparent;
-    color:rgba(255, 255, 255, 0.0);
+    color:rgba(255, 255, 255, 0.1);
     z-index: 100;
     resize: none;
+    width:10000px;
 }
 
 #caret {
@@ -96,11 +97,8 @@ html, body {
     width:100%;
     padding:0 0.5em 0 0; 
     margin:0;
-    height: 14px;
-    max-height: 14px;
-    line-height: 14px;
-    border-top: 1px solid transparent;
-    border-bottom:2px solid transparent;
+    height: 16px;
+    max-height: 16px;
     color: rgba(255, 255, 255, 0.5);
     font-size:12px;
     background-color: #282B2E;

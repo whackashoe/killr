@@ -25,26 +25,22 @@ killr.io is the most intuitive, quick to use, and beautiful pasting and collabor
         </table>
     </div>
     <div id="content"><pre><code></code></pre></div>
-    <textarea spellcheck="false" autocomplete="off" autofocus="true" id="editor" name="code" disabled>{{ $diff or '' }}</textarea>
+    <textarea spellcheck="false" autocomplete="off" autofocus="true" id="editor" name="code" readonly>{{ $diff or '' }}</textarea>
 @stop
 
 @section ('scripts')
     <script>
     $(document).ready(function() {
         hljs.initHighlightingOnLoad();
-        var cur_line = 1;
         $('#linenumbers td').each(function(i, v) {
             var val = $(v).text();
             if(val == '-') {
                 $(v).css('color', 'rgba(250, 35, 35, 0.7)');
             } else if(val == '+') {
                 $(v).css('color', 'rgba(10, 175, 10, 0.7)');
-                ++cur_line;
             } else {
-                ++cur_line;
+                $(v).text('.');
             }
-
-            $(v).text((cur_line - 1));
         });
     });
     </script>
