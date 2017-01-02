@@ -44,7 +44,7 @@ view the modification tree for {{ $paste->slug }}
 
         $.getJSON("/" + m_slug + "/mods.json", function(results) {
             $.each(results, function(i, v) {
-                var html = '<li><a href="/' + v.slug + '">' + v.created_at + ' (' + v.mods.length + ' mods)</a> <a href="/' + m_slug + '/diff/' + v.slug +'">[diff]</a>';
+                var html = '<li><a href="/' + v.slug + '">' + v.created_at + ' (' + v.mods.length + ' mods)</a> <a href="/{{ $paste->slug }}/diff/' + v.slug +'">[diff]</a>';
                 if(v.mods.length > 0) {
                     html += '<button class="expand-mods" data-slug="' + v.slug + '">+</button></li>';
                 }
