@@ -89,7 +89,8 @@ class PasteController extends BaseController {
         }
 
         $diff = (new Differ)->diff($paste->code, $mod->code);
-        $diff_lines = array_slice(explode("\n", $diff), 3);
+        $diff_exploded = explode("\n", $diff);
+        $diff_lines = array_slice($diff_exploded, 3, count($diff_exploded) - 4);
         $diff_line_list = [];
         foreach($diff_lines as &$line) {
             $diff_line_list[] = substr($line, 0, 1);
