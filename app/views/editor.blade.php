@@ -23,7 +23,8 @@ killr.io is the most intuitive, quick to use, and beautiful pasting and collabor
     @if (isset($paste->id) && !empty($paste->id))
         <a href="{{ url($paste->slug . '/raw') }}"><button id="raw">raw</button></a>
     @endif
-    @if (isset($paste->parent_id) && $paste->parent_id != null)
+    @if (isset($paste->parent_id) && $paste->parent != null)
+        <a href="{{ url($paste->parent->slug . '/diff/' . $paste->slug) }}"><button id="parent">diff</button></a>
         <a href="{{ url($paste->parent->slug) }}"><button id="parent">parent</button></a>
     @endif
     @if (isset($paste->id) && isset($paste->modsCount) && $paste->modsCount > 0)

@@ -8,6 +8,10 @@ killr.io :: {{ $paste->slug }} modification tree
 view the modification tree for {{ $paste->slug }} 
 @stop
 
+@section ('menu_title')
+killr.io :: viewing mods of {{ $paste->slug }}
+@stop
+
 @section ('menu_items')
     @if (isset($paste->parent_slug) && !empty($paste->parent_slug))
         <a href="{{ url($paste->parent_slug) }}"><button id="parent">parent</button></a>

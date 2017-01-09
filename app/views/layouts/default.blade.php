@@ -31,7 +31,7 @@
     <body>
         <menu id="mainmenu">
             <div id="linepadder"></div>
-            <a href="{{ url('/') }}"><button id="logo">killr.io</button></a>
+            <a href="{{ url('/') }}"><button id="logo">@yield ('menu_title', 'killr.io')</button></a>
             @yield ('menu_items')
             <a href="{{ url('terms') }}"><button id="terms">terms</button></a>
             <a href="{{ url('about') }}"><button id="about">about</button></a>

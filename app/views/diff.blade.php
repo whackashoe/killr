@@ -10,8 +10,13 @@ killr.io is the most intuitive, quick to use, and beautiful pasting and collabor
 @endif
 @stop
 
+@section ('menu_title')
+killr.io :: comparing /{{ $paste->slug }} to /{{ $mod->slug }}
+@stop
+
 @section ('menu_items')
-    <a href="{{ url($paste->slug . '/mods') }}"><button id="back">back</button></a>
+    <a href="{{ url($mod->slug) }}"><button id="tomod">mod</button></a>
+    <a href="{{ url($paste->slug) }}"><button id="topaste">paste</button></a>
 @stop
 
 @section ('content')
@@ -38,6 +43,8 @@ killr.io is the most intuitive, quick to use, and beautiful pasting and collabor
                 $(v).css('color', 'rgba(250, 35, 35, 0.7)');
             } else if(val == '+') {
                 $(v).css('color', 'rgba(10, 175, 10, 0.7)');
+            } else if(val == '@') {
+                $(v).text('@');
             } else {
                 $(v).text('.');
             }

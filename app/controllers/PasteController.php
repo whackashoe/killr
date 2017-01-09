@@ -90,11 +90,16 @@ class PasteController extends BaseController {
 
         $diff = (new Differ)->diff($paste->code, $mod->code);
         $diff_exploded = explode("\n", $diff);
-        $diff_lines = array_slice($diff_exploded, 3, count($diff_exploded) - 4);
+        $diff_lines = array_slice($diff_exploded, 2, count($diff_exploded) - 1);
         $diff_line_list = [];
         foreach($diff_lines as &$line) {
-            $diff_line_list[] = substr($line, 0, 1);
-            $line = substr($line, 1);
+            if($line == '@@ @@') {
+                $diff_line_list[] = '@';
+                $line = "________________________________________________________________________________";
+            } else {
+                $diff_line_list[] = substr($line, 0, 1);
+                $line = substr($line, 1);
+            }
         }
         $diff_str = implode("\n", $diff_lines);
 
