@@ -30,12 +30,15 @@ killr.io :: comparing /{{ $paste->slug }} to /{{ $mod->slug }}
         </table>
     </div>
     <div id="content"><pre><code></code></pre></div>
-    <textarea spellcheck="false" autocomplete="off" autofocus="true" id="editor" name="code" readonly>{{ $diff or '' }}</textarea>
+    <textarea spellcheck="false" autocomplete="off" autofocus="true" id="editor" name="code" readonly></textarea>
 @stop
 
 @section ('scripts')
     <script>
     $(document).ready(function() {
+        @if (isset($paste->code))
+            $("#editor").val({{ json_encode($paste->code) }});
+        @endif
         hljs.initHighlightingOnLoad();
         $('#linenumbers td').each(function(i, v) {
             var val = $(v).text();
