@@ -22,7 +22,9 @@ killr.io is the most intuitive, quick to use, and beautiful pasting and collabor
     <button id="save">save</button>
     @if (isset($paste->id) && !empty($paste->id))
         <a href="{{ url($paste->slug . '/raw') }}"><button id="raw">raw</button></a>
+        <a href="{{ url($paste->slug . '/demo') }}"><button id="demo">demo</button></a>
     @endif
+    <button id="preview">preview</button>
     @if (isset($paste->parent_id) && $paste->parent != null)
         <a href="{{ url($paste->parent->slug . '/diff/' . $paste->slug) }}"><button id="parent">diff</button></a>
         <a href="{{ url($paste->parent->slug) }}"><button id="parent">parent</button></a>
@@ -98,6 +100,23 @@ killr.io is the most intuitive, quick to use, and beautiful pasting and collabor
         });
 
         $(this).scrollTop(0);
+
+        var preview_window;
+        $("#preview").click(function() {
+            $.post('/preview', {'code': $("#editor").val()}, function(res) {
+                if(res.success) {
+                    if(typeof(preview_window) === 'undefined' || preview_window.closed) {
+                        preview_window = window.open('/preview/' + res.slug, '_blank', 'toolbar=0,location=0,directories=0,status=1,menubar=0,titlebar=0,scrollbars=1,resizable=1');
+                    } else {
+                        preview_window.location.assign('/preview/' + res.slug);
+                    }
+
+                    preview_window.focus();
+                } else {
+                    console.log(res);
+                }
+            });
+        });
     });
 
     </script>

@@ -171,4 +171,59 @@ class PasteController extends BaseController {
         $paste->delete();
         return Response::json(['success' => true]);
     }
+
+    public function get_preview($slug)
+    {
+        try {
+            $preview = Preview::where('slug', '=', $slug)->firstOrFail();
+        } catch(ModelNotFoundException $e) {
+            return Response::make('404 preview not found', 404);
+        }
+
+        $response = Response::make($preview->code, 200);
+        $response->header('Content-Type', 'text/html');
+        return $response;
+    }
+
+    public function create_preview()
+    {
+        $input = Input::only('code');
+        $input = array_merge($input, ['ip' => Request::getClientIp()]);
+
+        $validator = Validator::make($input, Preview::$rules);
+        if($validator->fails()) {
+            return Response::json((object) ['success' => false, 'errors' => $validator->messages()]);
+        }
+
+        do {
+            $slug = strtolower(str_random(5));
+        } while(Preview::find($slug) != null);
+
+        $preview = new Preview;
+        $preview->ip   = $input['ip'];
+        $preview->code = $input['code'];
+        $preview->slug = $slug;
+        $preview->save();
+
+        return Response::json(['success' => true, 'slug' => $slug]);
+    }
+
+    public function demo($slug)
+    {
+        try {
+            $paste = $this->paste->where('slug', '=', $slug)->firstOrFail();
+        } catch(ModelNotFoundException $e) {
+            return Response::make('404 paste not found', 404);
+        }
+
+        $ip = Request::getClientIp();
+        if(strcmp($paste->ip, $ip) != 0) {
+            $paste->increment('views');
+            $paste->save();
+        }
+
+        $response = Response::make($paste->code, 200);
+        $response->header('Content-Type', 'text/html');
+        return $response;
+    }
 }
