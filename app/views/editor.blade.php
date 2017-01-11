@@ -37,7 +37,7 @@ killr.io is the most intuitive, quick to use, and beautiful pasting and collabor
 @section ('content')
     <div id="linenumbers"></div>
     <div id="content"><pre><code></code></pre></div>
-    <textarea spellcheck="false" autocomplete="off" autofocus="true" id="editor" name="code">{{ $paste->code or '' }}</textarea>
+    <textarea spellcheck="false" autocomplete="off" autofocus="true" id="editor" name="code"></textarea>
     <input type="hidden" name="parent_id" id="parent_id" value="{{ $paste->id or '' }}">
     <div id="caret"></div>
     <div class="hide" id="overlay"></div>
@@ -48,6 +48,9 @@ killr.io is the most intuitive, quick to use, and beautiful pasting and collabor
 @section ('scripts')
     <script>
     $(document).ready(function() {
+        @if (isset($paste->code))
+            $("#editor").val({{ json_encode($paste->code) }});
+        @endif
         $("#editor").bind('input propertychange', function() {
             var decoded = $("#editor").val();
             var cols_per_line = [];
@@ -103,15 +106,13 @@ killr.io is the most intuitive, quick to use, and beautiful pasting and collabor
 
         var preview_window;
         $("#preview").click(function() {
+            if(typeof(preview_window) === 'undefined' || preview_window.closed) {
+                preview_window = window.open('', '_blank', 'toolbar=0,location=0,directories=0,status=1,menubar=0,titlebar=0,scrollbars=1,resizable=1');
+            }
+ 
             $.post('/preview', {'code': $("#editor").val()}, function(res) {
                 if(res.success) {
-                    if(typeof(preview_window) === 'undefined' || preview_window.closed) {
-                        preview_window = window.open('/preview/' + res.slug, '_blank', 'toolbar=0,location=0,directories=0,status=1,menubar=0,titlebar=0,scrollbars=1,resizable=1');
-                    } else {
-                        preview_window.location.assign('/preview/' + res.slug);
-                    }
-
-                    preview_window.focus();
+                    preview_window.location.assign('/preview/' + res.slug);
                 } else {
                     console.log(res);
                 }
