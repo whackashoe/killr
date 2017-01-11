@@ -16,6 +16,21 @@ String.prototype.endsWith = function(suffix) {
     return this.indexOf(suffix, this.length - suffix.length) !== -1;
 };
 
+function redraw() {
+    $("#editor").val($("#editor").val().replaceAll('\t', '    '));
+    var decoded = $("#editor").val();
+
+    $('#content pre code').text(decoded);
+
+    $("#content code").each(function(i, block) {
+        hljs.initHighlighting.called = false;
+        hljs.highlightBlock(block);
+    });
+    $('#content, #content pre, #content code, #editor, #linenumbers').height($('#linenumbers table').height() + 30);
+    $('#content, #console pre, #content code').css('width', $('#editor')[0].scrollWidth);
+    $('#editor').css('width', $('#editor')[0].scrollWidth);
+}
+
 $(document).ready(function() {
     hljs.initHighlightingOnLoad();
 
@@ -37,21 +52,6 @@ $(document).ready(function() {
         document.querySelector('#editor').addEventListener('click', function() { update_caret(this); });
         document.querySelector('#editor').addEventListener('keydown', function() { update_caret(this); });
         document.querySelector('#editor').addEventListener('keyup', function() { update_caret(this); });
-    }
-
-    function redraw() {
-        $("#editor").val($("#editor").val().replaceAll('\t', '    '));
-        var decoded = $("#editor").val();
-
-        $('#content pre code').text(decoded);
-
-        $("#content code").each(function(i, block) {
-            hljs.initHighlighting.called = false;
-            hljs.highlightBlock(block);
-        });
-        $('#content, #content pre, #content code, #editor, #linenumbers').height($('#linenumbers table').height() + 1000);
-        $('#content, #console pre, #content code').css('width', $('#editor')[0].scrollWidth);
-        $('#editor').css('width', $('#editor')[0].scrollWidth);
     }
 
     $("body").on('keydown', '#editor', function(e) {

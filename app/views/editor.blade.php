@@ -92,6 +92,12 @@ killr.io is the most intuitive, quick to use, and beautiful pasting and collabor
             $("#error-modal").hide();
             $("#editor").focus();
         });
+
+        $(window).load(function() {
+            redraw();
+        });
+
+        $(this).scrollTop(0);
     });
 
     </script>

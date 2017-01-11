@@ -10,7 +10,7 @@
 
         <title>@yield ('title')</title>
 
-        <link href="{{ asset('build/styles.css?id=' . mt_rand(0, 100000)) }}" rel="stylesheet">
+        <link href="{{ asset('build/styles.css?id=1020') }}" rel="stylesheet">
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -33,12 +33,19 @@
             <div id="linepadder"></div>
             <a href="{{ url('/') }}"><button id="logo">@yield ('menu_title', 'killr.io')</button></a>
             @yield ('menu_items')
-            <a href="{{ url('terms') }}"><button id="terms">terms</button></a>
-            <a href="{{ url('about') }}"><button id="about">about</button></a>
         </menu>
         @yield ('content')
 
-        <script src="{{ asset('build/scripts.min.js?id=' . mt_rand(0, 100000)) }}"></script>
+        <footer>
+            <ul>
+                <li><a href="/about">about</a></li>
+                <li><a href="/terms">terms</a></li>
+                <li><a href="https://github.com/whackashoe/killr-cmdline">cmdline</a></li>
+                <li><a href="https://github.com/whackashoe/killr">source code</a></li>
+            </ul>
+        </footer>
+
+        <script src="{{ asset('build/scripts.min.js?id=1020') }}"></script>
         @yield ('scripts')
     </body>
 </html>

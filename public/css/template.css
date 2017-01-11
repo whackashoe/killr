@@ -49,7 +49,7 @@ html, body {
 #editor {
     background-color:transparent;
     color:rgba(255, 255, 255, 0.1);
-    z-index: 100;
+    z-index: 12;
     resize: none;
     width:10000px;
 }
@@ -61,7 +61,7 @@ html, body {
     width:1px;
     height:1.25em;
     background-color: rgba(255, 255, 255, 0.5);
-    z-index: 50;
+    z-index: 11;
     -webkit-animation: cpulse 1.4s infinite;
     line-height: 1.25em;
 }
@@ -81,7 +81,7 @@ html, body {
     width:3em;
     background-color: #282B2E;
     color:#fff;
-    z-index: 10;
+    z-index: 13;
     min-height: 100vh;
 }
 #linenumbers table {
@@ -114,7 +114,7 @@ html, body {
     color:#fff;
     margin: 0;
     padding: 0;
-    z-index: 500;
+    z-index: 20;
 }
 
 #linepadder {
@@ -152,7 +152,7 @@ button:hover {
     width:100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.4);
-    z-index: 15;
+    z-index: 13;
 }
 
 .modal {
@@ -224,3 +224,41 @@ button:hover {
 #modlisting ul li a:hover {
     opacity: 0.8;
 }
+
+footer {
+    z-index: 12;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    width: 100vw;
+    display: inline-block;
+    background-color:#282B2E;
+    text-align:center;
+    padding:0.2rem 0;
+}
+
+footer ul {
+    list-style:none;
+    padding:0;
+    margin:0;
+}
+
+footer ul li {
+    display:inline;
+    margin:0 0.5rem;
+    padding:0;
+}
+
+footer ul li a {
+    color:rgba(255,255,255,0.5);
+    text-decoration:none;
+    font-size:12px;
+}
+
+
+footer ul li a:hover {
+    cursor:pointer;
+    color:rgba(255,255,255,0.9);
+    text-decoration:underline;
+}
+
