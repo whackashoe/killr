@@ -72,4 +72,8 @@ $(document).ready(function() {
     $("#editor").bind('input propertychange', function() {
         redraw();
     }).trigger('propertychange');
+
+    $('#editor').bind('paste', function(e) {
+        setTimeout(function() { redraw(); }, 1);
+    }).trigger('propertychange');
 });
